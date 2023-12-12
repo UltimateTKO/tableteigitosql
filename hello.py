@@ -1,10 +1,7 @@
 #coding: utf-8
 import openpyxl
+import os
 
-def main():
-    # Excel作成
-    wb = openpyxl.Workbook()
-    wb.save("example.xlsx")
-
-if __name__ == "__main__":
-    main()
+dir = "."
+files = [f for f in os.listdir(dir) if ".xlsx" in os.path.join(dir, f)]
+print(files)
