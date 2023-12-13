@@ -11,7 +11,7 @@ def getSheetList(fileName):
 
 outTxt = open(file="create_sql.sql", mode="w")
 tabString = "	"
-newlineCode = "\r\n"
+newlineCode = "\n"
 
 xlsxFiles = [file for file in os.listdir(".") if ".xlsx" in os.path.join(".", file)]
 workbook = openpyxl.load_workbook(xlsxFiles[0])

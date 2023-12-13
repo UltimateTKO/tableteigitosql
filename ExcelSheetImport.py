@@ -12,6 +12,6 @@ print(workbook.sheetnames)
 txtFile = open(file="sheet_list.txt", mode="w")
 
 for name in workbook.sheetnames:
-	txtFile.write(name + "\r\n")
+	txtFile.write(name + "\n")
 
 txtFile.close()
