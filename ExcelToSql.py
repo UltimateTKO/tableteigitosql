@@ -17,6 +17,7 @@ xlsxFiles = [file for file in os.listdir(".") if ".xlsx" in os.path.join(".", fi
 workbook = openpyxl.load_workbook(xlsxFiles[0])
 
 for sheetName in getSheetList("sheet_list.txt"):
+	pklist = []
 	worksheet = workbook[sheetName]
 	print("CREATE TABLE " + worksheet["C" + str(6)].value + " (")
 	outTxt.write("CREATE TABLE " + worksheet["C" + str(6)].value + " (" + newlineCode)
@@ -35,8 +36,7 @@ for sheetName in getSheetList("sheet_list.txt"):
 			print(tabString + "NOT NULL", end="")
 			outTxt.write(tabString + "NOT NULL")
 		if optionCell.value is not None and "PK" in optionCell.value:
-			print(tabString + "PRIMARY KEY", end="")
-			outTxt.write(tabString + "PRIMARY KEY")
+			pklist.append(columnNameCell.value)
 
 		columnStartRow += 1
 
@@ -46,6 +46,10 @@ for sheetName in getSheetList("sheet_list.txt"):
 		else:
 			print("")
 			outTxt.write(newlineCode)
+
+	if not pklist == False:
+		print(tabString + "PRIMARY KEY(" + ",".join(pklist) + ")")
+		outTxt.write(tabString + "PRIMARY KEY(" + ",".join(pklist) + ")" + newlineCode)
 
 	print(");")
 	outTxt.write(");" + newlineCode + newlineCode)
